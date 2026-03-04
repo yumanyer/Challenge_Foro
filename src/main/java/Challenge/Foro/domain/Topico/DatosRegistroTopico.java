@@ -3,10 +3,10 @@ package Challenge.Foro.domain.Topico;
 import jakarta.validation.constraints.NotBlank;
 
 public record DatosRegistroTopico(
-    @NotBlank String titulo,
-    @NotBlank String mensaje,
-    @NotBlank String autor,
-    @NotBlank String curso
+        Long id, @NotBlank String titulo,
+        @NotBlank String mensaje,
+        @NotBlank String autor,
+        @NotBlank String curso
 ) {
- 
+
 }
