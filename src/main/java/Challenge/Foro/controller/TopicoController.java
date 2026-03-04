@@ -55,9 +55,7 @@ public class TopicoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DatosDetallesTopico> actualizar(
-            @PathVariable Long id,
-            @RequestBody @Valid DatosActualizarTopico datos) {
+    public ResponseEntity<DatosDetallesTopico> actualizar(@PathVariable Long id, @RequestBody @Valid DatosActualizarTopico datos) {
 
         var optionalTopico = topicoRepository.findById(id);
 
@@ -69,6 +67,22 @@ public class TopicoController {
         topico.actualizarTopico(datos);
 
         return ResponseEntity.ok(new DatosDetallesTopico(topico));
+    }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+
+        var optionalTopico = topicoRepository.findById(id);
+
+        if (optionalTopico.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        topicoRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build(); // 204
     }
 
 }
