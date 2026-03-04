@@ -52,4 +52,13 @@ public class TopicoController {
         var topico = topicoRepository.getReferenceById(id);
         return  ResponseEntity.ok(new DatosDetallesTopico(topico));
     }
+
+    @Transactional
+    @PutMapping
+    public ResponseEntity<DatosActualizarTopico> acutalizar (@RequestBody @Valid DatosActualizarTopico datos){
+        var topico=topicoRepository.getReferenceById(datos.id());
+        topico.actualizarTopico(datos);
+        return ResponseEntity.ok(new DatosActualizarTopico(topico));
+    }
+
 }
